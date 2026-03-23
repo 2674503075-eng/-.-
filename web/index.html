@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>局域网聊天室</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">在线用户</div>
+          <div id="userCount" class="user-count">0</div>
+        </div>
+        <div class="search-box">
+          <input id="userSearch" type="text" class="input mini" placeholder="搜索联系人..." />
+        </div>
+        <div id="userList" class="user-list">
+          <div class="user-item active" data-channel="group">
+            <div class="avatar-mini">G</div>
+            <div>群聊</div>
+            <div class="actions">
+              <button id="groupCallBtn" class="btn call-btn" title="语音通话">📞</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="chat-container">
+        <header class="top">
+          <div>
+            <div class="title">局域网聊天室 <span id="typingStatus" class="typing-status">对方正在输入...</span></div>
+            <div class="sub" id="connState">未连接</div>
+          </div>
+          <div class="me">
+            <input id="username" class="input" placeholder="昵称" maxlength="24" />
+            <button id="connectBtn" class="btn">连接</button>
+          </div>
+        </header>
+
+        <main class="panel">
+          <div id="messages" class="messages" aria-live="polite"></div>
+          <div id="emojiPicker" class="emoji-picker"></div>
+          <div id="dragDropOverlay" class="drag-drop-overlay">
+            <div class="drag-drop-text">松开即可上传文件</div>
+          </div>
+        </main>
+
+        <footer class="bottom">
+          <button id="emojiBtn" class="btn" title="发送表情">😊</button>
+          <button id="fileBtn" class="btn" title="发送文件">📎</button>
+          <input type="file" id="fileInput" style="display: none;" />
+          <textarea
+            id="text"
+            class="input grow"
+            placeholder="输入消息，回车发送，Shift+回车换行"
+            maxlength="1000"
+            rows="1"
+          ></textarea>
+          <button id="sendBtn" class="btn primary">发送</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="contextMenu" class="context-menu">
+      <div id="recallBtn" class="context-menu-item">撤回</div>
+    </div>
+
+    <div id="userContextMenu" class="context-menu">
+      <div id="clearHistoryBtn" class="context-menu-item" style="color: var(--bubble-self)">清除聊天记录</div>
+    </div>
+
+    <div id="micPermissionModal" class="modal-overlay" style="display: none;">
+      <div class="modal">
+        <div id="micModalTitle" class="modal-title">语音通话</div>
+        <div id="micModalText" class="modal-text">需要获取麦克风权限才能进行语音通话。</div>
+        <div class="modal-actions">
+          <button id="micDenyBtn" class="btn">拒绝</button>
+          <button id="micAllowBtn" class="btn primary">允许并继续</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
